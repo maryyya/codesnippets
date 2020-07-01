@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.search_list {
+    background: white;
+    display: inline-table;
+    padding: 15px;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    background: #fff;
+}
+
+.search_list th,
+.search_list td {
+    padding: 7px;
+}
+
+.search_list th {
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.radio_th th {
+    vertical-align: top;
+    padding-top: 16px;
+}
+
+.margin-right10 {
+    margin-right: 10px;
+}
+
+.display-none {
+    display: none;
+}
+
+.btn-wid115 {
+    width: 115px;
+    text-align: center;
+}
+
+.padding-top10 {
+    padding-top: 10px !important;
+}
+
+.padding-top25 {
+    padding-top: 25px !important;
+}
+
+.margin-top25 {
+    margin-top: 25px !important;
+}
+
+.margin-left-right10 {
+    margin: 0 10px !important;
+}
+
+.text-align-center {
+    text-align: center;
+}

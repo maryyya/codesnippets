@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+.ppc_form_company_name {
+    width: 250px;
+}
+
+.ppc_form_applicant {
+    width: 150px;
+}
+
+.ppc_form_type {
+    width: 200px;
+}
+
+.ppc_form_post_date {
+    width: 160px;
+}
+
+.ppc_form_kaijou p {
+    line-height: 0.5;
+}
+
+.c_article_label.is_accepting {
+    background-color: #c10404;
+}
+
+.c_article_label.is_close {
+    background-color: #707070;
+}
+
+.c_article_label {
+    display: inline-block;
+    min-width: 100px;
+    border-radius: 50px;
+    color: #fff;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.title .c_article_label {
+    font-size: 13px;
+    font-weight: 100;
+}
+
+.u_h3style_semi span {
+    font-size: 13px;
+    color: #fff;
+    background: #009944;
+    padding: .4em .7em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.ppc_form_amount {
+    text-align: center;
+}
+
+.card {
+    min-width: 100% !important;
+    max-width: 100% !important;
+}
+
+.form-table-detail td, .form-table-detail th {  
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.form-table-detail {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    background: #ffff;
+}
+
+.form-table-detail th, .form-table-detail td {
+    padding: 15px;
+}
+
+.form-table-detail th {
+    background: #f9f9f9;
+}
+
+.form-table-detail .main-th th {
+    background: #b9b9b9;
+}

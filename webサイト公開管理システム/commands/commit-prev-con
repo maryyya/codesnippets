@@ -1,0 +1,95 @@
+1 #!/bin/bash
+2 # $1 作業コピー
+3
+4 svn_dir="/home/hpuDir/prev/con/$1"
+5 svn="/usr/local/bin/svn18"
+6 log="/home/hpuDir/logs/svncommitcmd/hpuDir-prev-con-$1-list.txt"
+7
+8 # check if there's parameter
+9 if [ $# -eq 0 ]; then
+10   echo "引数は指定されていません。 ドメイン名を入力してください。"
+11   exit
+12 elif [ ! -d "$svn_dir" ]; then
+13   echo "「$svn_dir」が存在しません。"
+14   exit
+15 fi
+16
+17 # check if svn repository
+18 "$svn" info "$svn_dir" > /dev/null 2>&1
+19 if [ "$?" -eq 1 ]; then
+20   echo "「"$svn_dir"」は作業コピーではありません。"
+21   exit
+22 fi
+23
+24 # svn add
+25 "$svn" add "$svn_dir"/* --force > /dev/null 2>&1
+26 add_res="$?"
+27
+28 # if no invalid file then commit after add
+29 if [ "$add_res" -eq 0 ]; then
+30   $svn commit "$svn_dir"/* -m "All"
+31   exit
+32 fi
+33
+34 # get the list of dir or sub dir
+35 dir_res=($(find "$svn_dir"  -type d -not -path '*/\.*'))
+36
+37 # loop through the list of dir
+38 for dir in "${dir_res[@]}"; do
+39   # check each dir if it has error file
+40   error_dir=$("$svn" add "$dir"/* 2>&1 | grep 'E000022: 有効な UTF-8 のデータ')
+41
+42   # skip the no error directory
+43   if [ -z "$error_dir" ]; then
+44     continue;
+45   fi
+46
+47   # counter for the file name
+48   cnt=0
+49
+50   # loop through out the directory
+51   for evil_file in "$dir"/*; do
+52     # do not check directory
+53     if [ -d "$evil_file" ]; then
+54       continue;
+55     fi
+56
+57     # start checking
+58     evil_res=$("$svn" add "$evil_file" 2>&1 | grep 'svn: E000022: 有効な UTF-8 のデータ')
+59
+60     # skip if file has no error
+61     if [ -z "$evil_res" ]; then
+62       continue;
+63     fi
+64
+65     # get the file inode
+66     evil_inode=$(ls -i "$evil_file")
+67
+68     # explode it since the output is "<inode> <filenm>". ex "1602627 ?? ??"
+69     evil_inode_num=$(echo "$evil_inode" | cut -d' ' -f1)
+70
+71     # create counter
+72     (( cnt ++ ))
+73
+74     # check if replace file exists then use timestamp
+75     name="xxxxx00$cnt"
+76     if [ -e "$evil_dir/$cnt" ]; then
+77       name=$(echo $(date "+%Y%m%d%H%M%S"))
+78     fi
+79
+80     # output the changed files
+81     timestamp=$(echo $(date "+%Y-%m-%d %H:%M:%S"))
+82     echo "$timestamp $evil_file ------> $dir/$name" >> "$log"
+83
+84     # replace
+85     find "$dir" -inum "$evil_inode_num" -exec mv '{}' "$dir/$name" \;
+86   done
+87 done
+88
+89 # start adding everything again
+90 "$svn" add "$svn_dir"/* --force > /dev/null 2>&1
+91
+92 # commit
+93 echo "Committing..."
+94 "$svn" commit "$svn_dir"/* -m ''
+95

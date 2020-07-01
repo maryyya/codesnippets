@@ -1,0 +1,28 @@
+1 #!/bin/bash
+2
+3 domainlist="/home/foruser-domainlist.txt"
+4 userid="hit_admin"
+5 fstabfile="/etc/fstab"
+6
+7 chown $userid:daemon /home/$userid
+8
+9 # 担当サイトの設定
+10 # 作成したユーザのホームディレクトリに担当するサイトのドメイン名のディレクトリを作成します。
+11 for domain in `cat $domainlist`
+12 do
+13   mkdir /home/$userid/$domain
+14
+15   chmod 755 /home/$userid/$domain
+16
+17   chown daemon:daemon /home/$userid/$domain
+18
+19   # 作成したディレクトリをFTPで参照できるようにマウントします。
+20   mount -o bind /home/ftp/$domain /home/$userid/$domain
+21
+22   # サーバ再起動時にマウントの設定が初期化されてしまうので、/etc/fstabにマウントの設定を記載します。
+23   printf '%s\n' "/home/ftp/$domain /home/$userid/$domain ext3 bind 0 0" >> "$fstabfile"
+24
+25   sed -i '1{/^$/d}' "$fstabfile"
+26 done
+27
+

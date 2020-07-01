@@ -1,0 +1,223 @@
+@charset "utf-8";
+
+.sie-import {
+    width: 120px;
+    margin-top: 75px;
+}
+
+.sie-btn-blue {
+    background: #0085ba;
+    border-color: #0073aa #006799 #006799;
+    box-shadow: 0 1px 0 #006799;
+}
+
+.sie-btn-red {
+    background: #d04848;
+    border-color: #aa1400 #991e00 #992500;
+    box-shadow: 0 1px 0 #991000;
+}
+
+.sie-btn-violet {
+    background: #4852d0;
+    border-color: #000daa #001a99 #020099;
+    box-shadow: 0 1px 0 #000c99;
+}
+
+.sie-btn {
+    color: #ffffff;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 12px 2px;
+    font-size: 13px;
+}
+
+.sie-marginTop10 {
+    margin-top: 10px;
+}
+
+.sie-marginTop20 {
+    margin-top: 20px;
+}
+
+.sie-marginTop55 {
+    margin-top: 55px;
+}
+
+.sie-modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.sie-modal-content {
+    margin: 0 auto;
+    border-radius: 15px;
+    text-align: center;
+    height: 100%;
+}
+
+.sie-modal-content img, .sie-modal-content .sie-modal-content-inside {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.sie-modal-content-inside {
+    width: 388px;
+    height: 187px;
+    background: #ffffff;
+    text-align: center;
+    font-size: 19px;
+    /* line-height: 265px; */
+    border-radius: 20px;
+    font-weight: bold;
+    color: #848484;
+
+}
+
+.sie-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.sie-modal-container-inside {
+    /* position: absolute; */
+    text-align: center;
+    /* width: 100%; */
+}
+
+.sie-modal-body {
+    height: 102px;
+    padding: 12px 39px;
+    bottom: 0;
+    display: table;
+}
+
+.sie-modal-body p {
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 17px;
+}
+
+.sie-btn-modal {
+    font-size: 12px;
+    padding: 6px 15px;
+    border-width: 0px;
+    -webkit-appearance: none;
+    border-radius: 4px;
+    line-height: 28px;
+}
+
+.sie-btn-cancel {
+    margin-left: 20px;
+    color: #ffffff;
+    background: #7c847e;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.sie-btn-import {
+    background: #3085d7;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 100;
+    width: 130px;
+}
+
+.sie-btn-export,
+.sie-btn-custom-sched-export {
+    background: #e45959;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 100;
+    width: 234px;
+}
+
+.sie-btn-download {
+    background: #3937b1;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 100;
+    width: 130px;
+}
+
+.sie-display-none {
+    display: none;
+}
+
+.sie-detail-delete, .file-member-delete-modal-btn {
+    background: #d04848;
+}
+
+.sie-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.sie-table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.sie-table tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.sie-import-res div h3 {
+    width: 50%;
+    float: left;
+}
+
+.sie-import-res div .p-btn {
+    width: 50%;
+    text-align: right;
+    float: right;
+}
+
+.sie-dl, .sie-table-div {
+    max-width: 1093px;
+    min-width: 1000px;
+}
+
+.sie-table-div .sie-table thead,
+.sie-table-div .sie-table tbody
+  {
+    max-height: 400px;
+    display: inline-block;
+}
+
+.sie-table-div .sie-table tbody {
+    overflow: scroll;
+}
+
+.sie-table-div .sie-table thead {
+    overflow-y: scroll;
+}
+
+.sie-sched-table tr td {
+    width: 400px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    /* display: inline-block; */
+}
+
+#export, #custom-sched-export {
+    width: 260px;
+}

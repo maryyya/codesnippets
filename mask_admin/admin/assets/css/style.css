@@ -1,0 +1,117 @@
+@charset "utf8";
+
+body {
+    background: #F7F7F7 !important;
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.hero-body {
+    padding: 1rem 1.5rem !important;
+}
+
+.hero-body .container {
+    margin-left: 11px !important;
+}
+
+.search {
+    padding: 2em;
+}
+
+.search-label {
+    background: #d4f8f3;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.search table {
+    width: 100%;
+    font-size: 14px !important;
+}
+
+.datetimepicker-dummy-input {
+    max-width: 80% !important;
+}
+
+.datetimepicker-dummy-wrapper {
+    border-radius: 4px !important;
+}
+
+.dropdown-trigger button,
+.dropdown-content{
+    width: 280px;
+}
+
+.search-table-th,
+.search-table-td{
+    word-break: keep-all;
+}
+
+.search-table-th {
+    background: #d4f8f3;
+    min-width: 120px;
+    padding: 17px !important;
+}
+
+.search-table-td {
+    padding: 0.2em !important;
+}
+
+.icon.is-small {
+    margin-left: 213px !important;
+}
+
+.select select {
+    width: 658px !important;
+}
+
+.is-current-page-link {
+    background-color: #00b89c !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+.count {
+    margin-right: 16px;
+}
+
+.page-input {
+    width: 44px !important;
+    text-align: center !important;;
+    margin-left: 6px !important;;
+}
+
+.page-count {
+    width: 44px;
+    vertical-align: middle;
+    height: 14px;
+    display: inline-block;
+}
+
+.pagination-list button {
+    cursor: pointer !important;
+}
+
+.form_type_title {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.margin-left-01 {
+    margin-left: 0.1em !important;
+}
+
+.margin-bottom-06 {
+    margin-bottom: 0.6em !important;
+}
+
+@media only screen and (max-width: 910px) {
+    .search-label {
+        width: 100%;
+    }
+}

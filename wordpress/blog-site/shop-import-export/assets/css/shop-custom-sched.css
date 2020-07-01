@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+.sie-custom-sched table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.sie-custom-sched td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.sie-custom-sched thead tr th {
+    background-color: #dddddd;
+}
+
+.sie-custom-sched select {
+    /* width: 60px !important; */
+    text-align: center;
+}
+
+.sie-custom-sched .time {
+    width: 150px;
+}
+
+.sie-custom-sched table tr th,
+.sie-custom-sched table tr td {
+    text-align: center;
+}
+
+.sie-custom-sched .plus,
+.sie-custom-sched .minus {
+    cursor: pointer;
+}
+
+
+.sie-custom-sched .plus img,
+.sie-custom-sched .minus img {
+    width: 25px;
+}
+
+.empty-td {
+    width: 28px;
+    height: 25px;
+}

@@ -1,0 +1,206 @@
+
+
+ #!/bin/bash
+      2
+      3 domainlist="/home/domainlist.txt"
+      4 domainnm_common=".misawssa.co.jp"
+      5 domainnm=".co.jp"
+      6 domainnm=""
+      7
+      8 for domain in `cat $domainlist`
+      9 do
+     10
+     11 # 本番ソースの配置
+     12 prod_src_path="/home/$domain/htdocs"
+     13
+     14 # FTP領域
+     15 ftp_dir="/home/ftp/$domain$domainnm"
+     16
+     17 # コンテンツ制作者退避領域
+     18 prev_con_dir="/home/hpuDir/prev/con/$domain$domainnm"
+     19
+     20 # 承認者プレビュー領域
+     21 prev_apv_dir="/home/hpuDir/prev/apv/$domain$domainnm"
+     22
+     23 # SVNリポジトリ
+     24 svn_dir="/home/hpuDir/svn/$domain$domainnm"
+     25 svn_url="http://127.0.0.1:8008/svn/$domain$domainnm"
+     26
+     27 # svnコマンドのパス
+     28 svn_cmd_path="/usr/local/bin/svn"
+     29
+     30 # svnadminコマンドのパス
+     31 svnadmin_cmd_path="/usr/local/bin/svnadmin"
+     32
+     33 # コンテンツ制作者プレビュー用バーチャルホストパス
+     34 vhost_con_path="/etc/httpd/conf.d/httpd-vhost-con.conf"
+     35
+     36 # 承認者プレビュー用バーチャルホストパス
+     37 vhost_apv_path="/etc/httpd/conf.d/httpd-vhost-apv.conf"
+     38
+     39 # ftp
+     40 vhost_ftp_path="/etc/httpd/conf.d/httpd-vhost-ftp.conf"
+     41
+     42 # message
+     43 dir_exist_error="が存在します。 別のドメイン名を入力してください。"
+     44 dir_created="を作成しました。"
+ 45 dir_not_created="が存在します。ディレクトリを作成しませんでした。"
+     46 dir_not_exists="が存在しません。"
+     47
+     48 # vhostコンテンツ制作者内容
+     49 vhost_con_content="
+     50 <VirtualHost *:80>
+     51     ServerName con-prev.$domain$domainnm_common
+     52     ServerAlias www.con-prev.$domain$domainnm_common
+     53     ServerAdmin admin@misawssa.co.jp
+     54     DocumentRoot /home/hpuDir/prev/con/$domain$domainnm/htdocs
+     55     ErrorLog /home/hpuDir/prev/http-logs/error_log
+     56     CustomLog /home/hpuDir/prev/http-logs/access_log combined
+     57     <Directory "/home/hpuDir/prev/con/$domain$domainnm/htdocs">
+     58         Options FollowSymLinks Includes MultiViews ExecCGI
+     59         AllowOverride All
+     60         AuthUserFile /etc/httpd/conf/.htpasswd
+     61         AuthType Basic
+     62         AuthName "st4.misawssa.co.jp"
+     63         Require valid-user
+     64     </Directory>
+     65 </VirtualHost>"
+     66
+     67 # vhost承認者内容
+     68 vhost_apv_content="
+     69 <VirtualHost *:80>
+     70     ServerName apv-prev.$domain$domainnm_common
+     71     ServerAlias www.apv-prev.$domain$domainnm_common
+     72     ServerAdmin admin@misawssa.co.jp
+     73     DocumentRoot /home/hpuDir/prev/apv/$domain$domainnm/htdocs
+     74     ErrorLog /home/hpuDir/prev/http-logs/error_log
+     75     CustomLog /home/hpuDir/prev/http-logs/access_log combined
+     76     <Directory "/home/hpuDir/prev/apv/$domain$domainnm/htdocs">
+     77         Options FollowSymLinks Includes MultiViews ExecCGI
+     78         AllowOverride All
+     79         AuthUserFile /etc/httpd/conf/.htpasswd
+     80         AuthType Basic
+     81         AuthName "st4.misawssa.co.jp"
+     82         Require valid-user
+     83     </Directory>
+     84 </VirtualHost>"
+     85
+     86 # ftp
+vhost_ftp_content="<VirtualHost *:80>
+     88     ServerName ftp-prev.$domain$domainnm_common
+     89     ServerAlias www.ftp-prev.$domain$domainnm_common
+     90     ServerAdmin admin@misawssa.co.jp
+     91     DocumentRoot /home/ftp/$domain$domainnm/htdocs
+     92     ErrorLog /home/hpuDir/prev/http-logs/error_log
+     93     CustomLog /home/hpuDir/prev/http-logs/access_log combined
+     94    <Directory "/home/ftp/$domain$domainnm/htdocs">
+     95         Options FollowSymLinks Includes MultiViews ExecCGI
+     96         AllowOverride All
+     97         AuthUserFile /etc/httpd/conf/.htpasswd
+     98         AuthType Basic
+     99         AuthName "st4.misawssa.co.jp"
+    100         Require valid-user
+    101     </Directory>
+    102 </VirtualHost>"
+    103
+    104 # check if there's parameter and directory exists
+    105 if [ -d "$ftp_dir" ]; then
+    106     echo "「$ftp_dir」$dir_exist_error"
+    107     exit
+    108 elif [ -d "$prev_con_dir" ]; then
+    109     echo "「$prev_con_dir」$dir_exist_error"
+    110     exit
+    111 elif [ -d "$prev_apv_dir" ]; then
+    112     echo "「$prev_apv_dir」$dir_exist_error"
+    113     exit
+    114 #elif [ ! -d "$prod_src_path" ]; then
+    115 #    echo "「$prod_src_path」$dir_not_exists"
+    116 #    exit
+    117 fi
+    118
+    119 # check if ftp dir was not created
+    120 check_created_dir() {
+    121   if [ ! -d "$1" ]; then
+    122     echo "「$1」$dir_not_created"
+    123     exit
+    124   else
+    125     echo "「$1」$dir_created"
+    126   fi
+    127 }
+128
+    129 # start making ftp dir
+    130 mkdir "$ftp_dir"
+    131 check_created_dir "$ftp_dir"
+    132
+    133 # start making コンテンツ者プレビュー dir
+    134 mkdir "$prev_con_dir"
+    135 check_created_dir "$prev_con_dir"
+    136
+    137 # start making 承認者プレビュー dir
+    138 mkdir "$prev_apv_dir"
+    139 check_created_dir "$prev_apv_dir"
+    140
+    141 # 本番ソースの配置
+    142 # 本番ソースをFTP領域、コンテンツ制作者退避領域にコピーします。
+    143 # cp -Rpv "$prod_src_path/"* "$ftp_dir"
+    144 # cp -Rpv "$prod_src_path/"* "$prev_con_dir"
+    145
+    146 # SVN設定
+    147 # 追加するサイトのSVNリポジトリを作成します。
+    148 $svnadmin_cmd_path create "$svn_dir"
+    149
+    150 # コンテンツ制作者退避領域、承認者プレビュー領域に作成したリポジトリをチェックアウトします。
+    151 $svn_cmd_path checkout "$svn_url" "$prev_con_dir"
+    152 $svn_cmd_path checkout "$svn_url" "$prev_apv_dir"
+    153
+    154 # 本番ソースの配置
+    155 # 本番ソースをFTP領域、コンテンツ制作者退避領域にコピーします。
+    156 #cp -Rpv "$prod_src_path/"* "$ftp_dir"
+    157 #cp -Rpv "$prod_src_path/"* "$prev_con_dir"
+    158
+    159 # 所有者の変更
+    160 chown -R daemon:daemon "$ftp_dir"
+    161 chown -R daemon:daemon "$prev_con_dir"
+    162 chown -R daemon:daemon "$prev_apv_dir"
+    163 chown -R daemon:daemon "$svn_dir"
+    164
+    165 # 権限変更
+    166 # ftpディレクトリ
+    167 find "$ftp_dir" -type d -exec chmod 775 '{}' \;
+    168 find "$ftp_dir" -type f -exec chmod 664 '{}' \;
+    169
+      170 # コンテンツ制作者
+        171 find "$prev_con_dir" -type d -exec chmod 775 '{}' \;
+        172 find "$prev_con_dir" -type f -exec chmod 664 '{}' \;
+        173
+        174 # コンテンツ制作者
+        175 find "$prev_apv_dir" -type d -exec chmod 775 '{}' \;
+        176 find "$prev_apv_dir" -type f -exec chmod 664 '{}' \;
+        177
+        178 # check if file exists
+        179 create_vhost() {
+        180   flg=0
+        181   if [ ! -f "$1" ]; then
+        182     flg=1
+        183   fi
+        184
+        185   cp $1 $1`date '+.%Y%m%d%H%M%S'`
+        186
+        187   # コンテンツ制作者プレビュー
+        188   printf '%s\n' "$2" >> "$1"
+        189
+        190   # remove the first line which is empty
+        191   if [ "$flg" -eq 1 ]; then
+        192     sed -i '1{/^$/d}' "$1"
+        193   fi
+        194 }
+        195
+        196 # create_vhost "$vhost_con_path" "$vhost_con_content"
+        197 # create_vhost "$vhost_apv_path" "$vhost_apv_content"
+        198 # create_vhost "$vhost_ftp_path" "$vhost_ftp_content"
+        199 done
+        200
+        201 # restart httpd gracefully
+        202 # systemctl reload httpd
+
+

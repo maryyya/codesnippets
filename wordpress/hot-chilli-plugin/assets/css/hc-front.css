@@ -1,0 +1,135 @@
+@charset "utf-8";
+
+.hc-login-error {
+    text-align: center;
+    margin: 0 auto;
+    width: 500px;
+    border-left: 5px solid #ff2e2e;
+}
+
+.hc-download-error, .hc-search-error, .contact-error {
+    display: none;
+    border-left: 5px solid #ff2e2e;
+}
+
+.hc-search-show {
+    margin-bottom: 25px;
+    display: block;
+}
+
+.hc-login-error p, .hc-download-error p, .hc-search-error p, .contact-error p {
+    margin-top: 20px;
+    background: #e8e8e8;
+    padding: 10px 0;
+    text-align: left;
+    text-indent: 15px;
+}
+
+.contact-error p {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.hc-search-loader {
+    height: 520px;
+    display: none;
+    width: 100%;
+}
+
+.hc-search-content-loader {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.hc-front-error {
+    display: block;
+    color: #ff2e2e;
+    font-size: 1.5rem;
+    word-wrap: break-word;
+}
+
+.hc-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.hc-modal-content {
+    margin: 0 auto;
+    border-radius: 15px;
+    text-align: center;
+    height: 100%;
+}
+
+.hc-modal-content img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.hc-pagination {
+    margin-top: 20px;
+    text-align: center;
+    background: none;
+}
+
+.hc-prev {
+    padding: 2px 26px !important;
+    margin-right: 17px !important;
+    background-color: #fffaf0 !important;
+}
+
+.hc-next {
+    padding: 2px 26px !important;
+    margin-left: 17px !important;
+    background-color: #fffaf0 !important;
+}
+
+.hc-pagination a {
+    background-color: #fff;
+    color: #f47f0c;
+    text-decoration: none;
+}
+
+.hc-pagination a:hover {
+    background-color: #f47f0c !important;
+    color: #fff;
+}
+
+.hc-pagination span, .hc-pagination a {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #f47f0c;
+    margin: 3px;
+}
+
+.hc-pagination span.hc-current {
+    background-color: #f47f0c;
+    color: #fff;
+}
+
+@media screen and (max-width: 640px) {
+    .hc-login-error {
+        width: 100%;
+    }
+
+    .hc-login-error p {
+        padding: 10px
+    }
+}
+
+
+
+

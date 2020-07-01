@@ -1,0 +1,291 @@
+jQuery(function($){
+    var plugin_url = $('input[name=sie_plugin_url]').val();
+
+    // creating the html
+    custom_sched_html();
+
+    $(document).on('click', '.plus', plus);
+    $(document).on('click', '.minus', minus);
+
+    /**
+     * Plus sign image.
+     * Used for every row
+     */
+    function plus_img() {
+        return '<img src="'+plugin_url+'assets/img/plus.png" alt="Plus">';
+    }
+
+    /**
+     * Minus sign image.
+     * Used for every row
+     */
+    function minus_img() {
+        return '<img src="'+plugin_url+'assets/img/minus.png" alt="Minus">';
+    }
+
+    /**
+     * If plus sign is clicked in every row.
+     * If clicked then add a new row.
+     */
+    function plus() {
+        var cnt = $('.sie-custom-sched tbody tr').length;
+        var nxt = cnt+1;
+
+        var select = select_str();
+        var tr ='<tr>';
+        tr+='<td><p class="plus sdfsdf">'+plus_img()+'</p></td>';
+        tr+='<td><input type="checkbox" name="shop[sched]['+nxt+'][time_display]" value="1"></td>';
+        tr+='<td><input type="text" name="shop[sched]['+nxt+'][time]" id="shop-sched'+nxt+'-name"></td>';
+        tr+='<td>'+select_str(nxt, 'mon', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'tue', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'wed', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'thu', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'fri', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'sat', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'sun', '〇')+'</td>';
+        tr+='<td>'+select_str(nxt, 'hol', '〇')+'</td>';
+        tr+='<td><p class="minus">'+minus_img()+'</p></td>';
+        tr+='</tr>';
+
+        $(this).closest('tr').after(tr);
+        $(this).closest('tr').find('.plus img').remove();
+    }
+
+    /**
+     * Minus sign in every row.
+     * If this is clicked then,
+     * remove the row. The default
+     * number of rows is only one
+     * so if row is only one then the
+     * minus sign will not be
+     * on the last one.
+     */
+    function minus() {
+        var plus = plus_img();
+        $(this).closest('tr').prev().find('.plus').html(plus);
+
+        var cnt = $('.sie-custom-sched table tbody tr').length;
+        if (cnt < 2) {
+            alert('これは削除できません。 デフォルトの行は1です。');
+        } else {
+            $(this).closest('tr').remove();
+        }
+    }
+
+    /**
+     * Value of select for every row in every
+     * column. The value is literally the
+     * same with the display.
+     * The values are '〇', '△', '✖', '休', '※1', '※2', '空白'.
+     */
+    function select_str(cnt, day, val) {
+        var select = '<select name="shop[sched]['+cnt+']['+day+']">';
+        var types = ['〇', '△', '✖', '休', '※1', '※2', '空白'];
+        for (let index = 0; index < types.length; index++) {
+            const element = types[index];
+            var data = val === element?'selected':'';
+            select+='<option value="'+element+'" '+data+'>'+element+'</option>';
+        }
+        select+='</select>';
+
+        return select;
+    }
+
+    /**
+     * This will display the table in the admin
+     * page. This will return html string.
+     * This is custom made and the data
+     * is from the table column called
+     * prefix_shop like tokyo_shop.
+     */
+    function custom_sched_html() {
+        var data_val = $('input[name=sie-shop-value]').val();
+        // console.log(JSON.parse(data_val));
+        var data = data_val === ''?data_val:JSON.parse(data_val);
+        var str = '<div class="acf-field acf-field-textarea acf-field-5bcd24f9ee5ea" data-name="store_remarks" data-type="textarea" data-key="field_5bcd24f9ee5ea">';
+        str+='<div class="acf-label">';
+        str+='<label for="">カスタム営業時間</label></div>';
+
+        str+='<div class="acf-input sie-custom-sched">';
+        str+='<table>';
+
+        str+='<thead>';
+        str+='<tr>';
+        str+='<td></td>';
+        str+='<td></td>';
+        str+='<td></td>';
+
+        if (data_val.length > 0) {
+            var item = JSON.parse(data[0].data);
+            var mon_selected = item.mon_display == 1?'checked':'';
+            var tue_selected = item.tue_display == 1?'checked':'';
+            var wed_selected = item.wed_display == 1?'checked':'';
+            var thu_selected = item.thu_display == 1?'checked':'';
+            var fri_selected = item.fri_display == 1?'checked':'';
+            var sat_selected = item.sat_display == 1?'checked':'';
+            var sun_selected = item.sun_display == 1?'checked':'';
+            var hol_selected = item.hol_display == 1?'checked':'';
+
+            str+='<td><input type="checkbox" name="shop[mon_display]" value="1" '+mon_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[tue_display]" value="1" '+tue_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[wed_display]" value="1" '+wed_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[thu_display]" value="1" '+thu_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[fri_display]" value="1" '+fri_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[sat_display]" value="1" '+sat_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[sun_display]" value="1" '+sun_selected+'></td>';
+            str+='<td><input type="checkbox" name="shop[hol_display]" value="1" '+hol_selected+'></td>';
+        } else {
+            str+='<td><input type="checkbox" name="shop[mon_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[tue_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[wed_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[thu_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[fri_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[sat_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[sun_display]" value="1"></td>';
+            str+='<td><input type="checkbox" name="shop[hol_display]" value="1"></td>';
+        }
+
+        str+='<td></td>';
+        str+='</tr>';
+        str+='</thead>';
+
+        str+='<thead>';
+        str+='<tr>';
+        str+='<th></th>';
+        str+='<th></th>';
+        str+='<th class="time">営業時間</th>';
+        str+='<th>月</th>';
+        str+='<th>火</th>';
+        str+='<th>水</th>';
+        str+='<th>木</th>';
+        str+='<th>金</th>';
+        str+='<th>土</th>';
+        str+='<th>日</th>';
+        str+='<th>祝</th>';
+        str+='<th></th>';
+        str+='</tr>';
+        str+='</thead>';
+
+        str+='<tbody>';
+
+        const items_length = data.length;
+        if (items_length > 0) {
+            for (let i = 0; i < items_length; i++) {
+                const element = JSON.parse(data[i].data);
+                const cntr = i+1;
+                const checked = parseInt(element.time_display) == 1?'checked':'';
+                const time_element_val = typeof element.time_display === 'undefined'?1:1;
+                str+='<tr>';
+                str+='<input type="hidden" name="shop[sched]['+cntr+'][item_id]" value="'+data[i].ID+'">';
+
+                // to add the plus button
+                if (items_length === cntr && items_length > 2) {
+                    str+='<td><p class="plus"><img src="'+plugin_url+'assets/img/plus.png" alt="Plus"></p></td>';
+                } else if (items_length === 1 && cntr == 1) {
+                    str+='<td><p class="plus"><img src="'+plugin_url+'assets/img/plus.png" alt="Plus"></p></td>';
+                } else {
+                    str+='<td><p class="plus"></p></td>';
+                }
+
+                str+='<td><input type="checkbox" name="shop[sched]['+cntr+'][time_display]" value="'+time_element_val+'" '+checked+'></td>';
+                str+='<td><input type="text" name="shop[sched]['+cntr+'][time]" id="shop-sched'+cntr+'-name" value="'+element.time+'"></td>';
+                str+='<td>'+select_str(cntr, 'mon', element.mon)+'</td>';
+                str+='<td>'+select_str(cntr, 'tue', element.tue)+'</td>';
+                str+='<td>'+select_str(cntr, 'wed', element.wed)+'</td>';
+                str+='<td>'+select_str(cntr, 'thu', element.thu)+'</td>';
+                str+='<td>'+select_str(cntr, 'fri', element.fri)+'</td>';
+                str+='<td>'+select_str(cntr, 'sat', element.sat)+'</td>';
+                str+='<td>'+select_str(cntr, 'sun', element.sun)+'</td>';
+                str+='<td>'+select_str(cntr, 'hol', element.hol)+'</td>';
+
+                // to add the minus button
+                if (cntr > 1) {
+                    str+='<td><p class="minus"><img src="'+plugin_url+'assets/img/minus.png" alt="Minus"></p></td>';
+                } else {
+                    str+='<td><p class="empty-td"></p></td>';
+                }
+
+                str+='</tr>';
+            }
+
+            if (items_length == 1) {
+                // str+=row_2();
+                // str+=row_3();
+            } else if (items_length == 2) {
+                str+=row_3();
+            }
+
+        } else {
+            str+='<tr>';
+            str+='<td><p class="plus"><img src="'+plugin_url+'assets/img/plus.png" alt="Plus"></p></td>';
+            str+='<td><input type="checkbox" name="shop[sched][1][time_display]" value="1"></td>';
+            str+='<td><input type="text" name="shop[sched][1][time]" id="shop-sched1-name"></td>';
+            str+='<td>'+select_str('1', 'mon', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'tue', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'wed', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'thu', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'fri', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'sat', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'sun', '〇')+'</td>';
+            str+='<td>'+select_str('1', 'hol', '〇')+'</td>';
+            str+='<td><p class="empty-td"></p></td>';
+            str+='</tr>';
+
+            // str+=row_2();
+            // str+=row_3();
+        }
+
+        str+='</tbody>';
+        str+='</table>';
+        str+='</div>';
+
+        str+='</div>';
+        $('.acf-field.acf-field-textarea.acf-field-5bcd24f9ee5ea').after(str);
+    }
+
+    /**
+     *
+     */
+    function row_2() {
+        var str = '';
+        str+='<tr>';
+        str+='<td></td>';
+        str+='<td><input type="checkbox" name="shop[sched][2][time_display]" value="1"></td>';
+        str+='<td><input type="text" name="shop[sched][2][time]" id="shop-sched2-name"></td>';
+        str+='<td>'+select_str('2', 'mon', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'tue', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'wed', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'thu', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'fri', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'sat', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'sun', '〇')+'</td>';
+        str+='<td>'+select_str('2', 'hol', '〇')+'</td>';
+        str+='<td></td>';
+        str+='</tr>';
+
+        return str;
+    }
+
+    /**
+     *
+     */
+    function row_3() {
+        var str = '';
+        str+='<tr>';
+        str+='<td><p class="plus"><img src="'+plugin_url+'assets/img/plus.png" alt="Plus"></p></td>';
+        str+='<td><input type="checkbox" name="shop[sched][3][time_display]" value="1"></td>';
+        str+='<td><input type="text" name="shop[sched][3][time]" id="shop-sched3-name"></td>';
+        str+='<td>'+select_str('3', 'mon', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'tue', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'wed', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'thu', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'fri', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'sat', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'sun', '〇')+'</td>';
+        str+='<td>'+select_str('3', 'hol', '〇')+'</td>';
+        str+='<td><p class="minus"><img src="'+plugin_url+'assets/img/minus.png" alt="Minus"></p></td>';
+        str+='</tr>';
+
+        return str;
+    }
+});

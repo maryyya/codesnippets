@@ -1,0 +1,11 @@
+[2017/06/29 18:22:54] [ERROR] Email params are empty.
+[2017/06/29 18:22:54] [ERROR] To and cc recipient are empty.
+[2017/06/29 18:22:54] [ERROR] No from.
+[2017/06/29 18:22:54] [ERROR] To recipient is not array or string.
+[2017/06/29 18:22:54] [ERROR] Cc recipient is not array or string.
+[2017/06/29 18:22:54] [ERROR] Bcc recipient is not array or string.
+[2017/06/29 18:22:54] [WARNING] Subject is empty.
+[2017/06/29 18:22:54] [WARNING] Body is empty.
+[2017/06/29 18:22:54] [ERROR] To recipient is not array or string.
+[2017/06/29 18:22:54] [ERROR] Cc recipient is not array or string.
+[2017/06/29 18:22:54] [ERROR] Bcc recipient is not array or string.

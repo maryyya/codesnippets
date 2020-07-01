@@ -1,0 +1,193 @@
+/* week table */
+body {
+    background-color: #f1f1f1 !important;
+}
+#restaurant_shop {
+    font-family: Arial, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    /*width: 1200px;*/
+    /*width: 100%;*/
+    max-width: 1200px;
+    margin-top: 30px;
+}
+#restaurant_shop h2 {
+    font-size: 1.5rem;
+}
+.calendar_input th {
+    vertical-align: middle !important;
+    width: 150px;
+}
+.calendar_input select {
+    height: 28px !important;
+}
+.calendar_input input {
+    height: 28px;
+}
+.calendar_input td, .calendar_input th {
+    padding: 5px !important;
+}
+.calendar_input {
+    font-size: 0.8em;
+}
+.calendar_input .require {
+    background-color: #e40a0a;
+    border-radius: 2px;
+    color: #fff;
+    float: right;
+    font-size: 11px;
+    line-height: 1.2;
+    padding: 3px 6px;
+    position: relative;
+}
+.calendar_input .error, .errors {
+    color: #e40a0a;
+    font-size: 13px;
+    display: inline-block;
+}
+.blockpad {
+    padding: 20px;
+    background-color: white;
+}
+.blockpad .bold {
+    font-weight: bold;
+}
+.calendarnav {
+    background: #3a8595;
+    padding: 8px 20px;
+}
+.calendarnav p {
+    font-weight: bold;
+    color: #FFF;
+    font-size: 20px;
+    vertical-align: middle;
+    display: table-cell;
+    width: 830px;
+}
+.calendarnav ul {
+    vertical-align: middle;
+    display: table-cell;
+    width: 265px;
+    text-align: right;
+}
+.calendarnav ul li {
+    margin-right: 5px;
+    display: inline-block;
+}
+.calendarnav ul li a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+}
+.calendarnav ul li a img {
+    vertical-align: middle;
+}
+.table_week {
+    border-collapse: collapse;
+    width: 100%;
+}
+.table_week th {
+    background: #5fa7b7;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    width: 157px;
+}
+.table_week td {
+    vertical-align: top;
+    font-size: 15px;
+    padding: 10px;
+}
+.table_week .info td {
+    background: #6f87a6 !important;
+    color: #FFF;
+    text-align: center;
+    line-height: 1.4;
+    vertical-align: middle;
+    border-right: 1px solid #98adc7;
+    font-size: 14px;
+}
+.table_week .info td:last-child {
+    border-right: none;
+}
+.table_week .menus {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+.table_week .menu {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+.table_week td:nth-child(even) {
+    background: #f3f3f3;
+}
+.table_week .price {
+    font-weight: bold;
+    color: #FFF;
+    font-size: 13px;
+    background: #de6b71;
+    padding: 2px 5px;
+    margin-top: 5px;
+    vertical-align: middle;
+}
+.table_week .meal li {
+    line-height: 1.4;
+    margin-bottom: 15px;
+    display: list-item;
+}
+.table_week .meal li:last-child {
+    margin-bottom: 0;
+}
+.display-none {
+    display: none !important;
+}
+
+.monthly .table_week td {
+     padding: 0px !important;
+}
+
+.monthly-li {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.monthly-li a {
+    display: block;
+}
+.monthly .table_week td:nth-child(even) {
+    background: #fff !important;
+}
+
+
+@media only screen and (min-width: 1280px) {
+    #restaurant_shop {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    #restaurant_shop {
+        width: 1200px;
+    }
+    .overlay {
+        width: 1200px;
+    }
+}
+
+.overlay {
+    /*background: #e9e9e9;*/
+    /*width: 1200px;*/
+    max-width: 1200px;
+    position: absolute;
+    top: 500px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+}
+.loader {
+    text-align: center;
+}

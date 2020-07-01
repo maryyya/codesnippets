@@ -1,0 +1,308 @@
+/* week table */
+body {
+    background-color: #f1f1f1 !important;
+}
+#stadium {
+    font-family: Arial, Roboto, "Droid Sans", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    /*width: 1200px;*/
+    margin-top: 30px;
+    max-width: 1200px;
+}
+#stadium h2 {
+    font-size: 1.5rem;
+}
+.calendar_input th {
+    vertical-align: middle !important;
+    width: 150px;
+}
+.calendar_input select {
+    height: 28px !important;
+}
+/*.calendar_input input {
+    height: 28px;
+}*/
+.calendar_input td, .calendar_input th {
+    padding: 5px !important;
+}
+.calendar_input {
+    font-size: 0.8em;
+}
+.calendar_input .require {
+    background-color: #e40a0a;
+    border-radius: 2px;
+    color: #fff;
+    float: right;
+    font-size: 11px;
+    line-height: 1.2;
+    padding: 3px 6px;
+    position: relative;
+}
+.calendar_input .error, .errors {
+    color: #e40a0a;
+    font-size: 13px;
+    display: block;
+}
+.blockpad {
+    padding: 20px;
+    background-color: white;
+}
+.blockpad .bold {
+    font-weight: bold;
+}
+.calendarnav {
+    background: #3a8595;
+    padding: 8px 20px;
+}
+.calendarnav p {
+    font-weight: bold;
+    color: #FFF;
+    font-size: 20px;
+    vertical-align: middle;
+    display: table-cell;
+    width: 830px;
+}
+.calendarnav ul {
+    vertical-align: middle;
+    display: table-cell;
+    width: 265px;
+    text-align: right;
+}
+.calendarnav ul li {
+    margin-right: 5px;
+    display: inline-block;
+}
+.calendarnav ul li a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 15px;
+    font-weight: bold;
+}
+.calendarnav ul li a img {
+    vertical-align: middle;
+}
+.table_week {
+    border-collapse: collapse;
+    width: 100%;
+}
+.table_week th {
+    background: #5fa7b7;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    width: 157px;
+}
+.table_week td {
+    vertical-align: middle;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+}
+.table_week .info td {
+    background: #6f87a6 !important;
+    color: #FFF;
+    text-align: center;
+    line-height: 1.4;
+    vertical-align: middle;
+    border-right: 1px solid #98adc7;
+    font-size: 14px;
+}
+.table_week .info td:last-child {
+    border-right: none;
+}
+.table_week .menus {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+}
+.table_week .menu {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    /*height: 110px;*/
+}
+.table_week td:nth-child(even) {
+    background: #f3f3f3;
+}
+.table_week .price {
+    font-weight: bold;
+    color: #FFF;
+    font-size: 13px;
+    background: #de6b71;
+    padding: 2px 5px;
+    margin-top: 5px;
+    vertical-align: middle;
+}
+.table_week .meal li {
+    line-height: 1.4;
+    margin-bottom: 15px;
+    display: list-item;
+}
+.table_week .meal li:last-child {
+    margin-bottom: 0;
+}
+.table_week .day td {
+    background: #f3f3f3;
+    border: 1px solid #FFF;
+    vertical-align: top;
+    height: 95px;
+}
+.table_week .prevmonth {
+    background: #dfdfdf !important;
+}
+.table_week .prevmonth .daynum {
+    color: #878787;
+}
+.table_week .daynum {
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+}
+.table_week .status {
+    width: 100%;
+    height: 17px;
+    display: block;
+    margin-bottom: 2px;
+}
+.table_week .status:last-child {
+    margin-bottom: 0;
+}
+.table_week .status1 {
+    background: url(../images/icon_circle.png) center no-repeat;
+    color: #FFF;
+    background-color: #94c85b;
+}
+.table_week .status2 {
+    background-color: #ababab;
+}
+.table_week .day a {
+    color: black;
+    text-decoration: none;
+}
+.display-none {
+    display: none !important;
+}
+
+.monthly .table_week td {
+     padding: 0px !important;
+}
+
+.monthly-li {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.monthly-li a {
+    display: block;
+}
+.monthly .table_week td:nth-child(even) {
+    background: #fff !important;
+}
+
+.menu a {
+    display: block;
+    text-decoration:none;
+}
+
+.menu a span {
+    display: block;
+    padding: 4px;
+    font-size: 13px;
+}
+
+.menu a span:last-child {
+    padding-bottom: 12px !important;
+}
+
+a:-webkit-any-link {
+    text-decoration: none !important;
+}
+
+.info td {
+    padding: 10px;
+}
+
+.table-crud td {
+    vertical-align: middle !important;
+}
+
+.space {
+    padding: 2px 65px 1px 71px;
+}
+
+.nospace {
+    padding: 24px;
+}
+.calendarnav ul li {
+    margin-right: 5px;
+    margin-bottom: 0px;
+    text-decoration: none;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+}
+#stadium .legend li {
+    vertical-align: middle;
+    margin-right: 20px;
+    display: inline-block;
+}
+#stadium .legend li .status {
+    width: 135px;
+    height: 17px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+#stadium .legend li .status1 {
+    background: url(../images/icon_circle.png) center no-repeat;
+    color: #FFF;
+    background-color: #94c85b;
+}
+#stadium .legend li .status2 {
+    background-color: #ababab;
+}
+#stadium .list_num_a li::before {
+    content: counter(parentheses) ".";
+}
+.legendp {
+    font-size: 100%;
+    margin-top: 10px;
+}
+
+
+@media only screen and (min-width: 1280px) {
+    #stadium {
+        width: 100%;
+    }
+    .overlay {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1920px) {
+    #stadium {
+        width: 1200px;
+    }
+    .overlay {
+        width: 1200px;
+    }
+}
+
+.overlay {
+    /*background: #e9e9e9;*/
+    /*width: 1200px;*/
+    max-width: 1200px;
+    position: absolute;
+    top: 500px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+}
+.loader {
+    text-align: center;
+}
+li#collapse-menu {
+    font-size: 14px;
+}
